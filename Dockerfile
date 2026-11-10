@@ -53,4 +53,4 @@ ENV PYTHONUNBUFFERED=1
 EXPOSE 8000
 
 # Start unified FastAPI server serving both API and Frontend SPA
-CMD ["sh", "-c", "uvicorn backend_api:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["python", "backend_api.py"]

@@ -13,14 +13,18 @@ from gnani.tts import GnaniTTSClient, AudioConfig
 
 load_dotenv()
 
-API_KEY = os.getenv("GNANI_API_KEY")
+API_KEY = os.getenv(
+    "GNANI_API_KEY",
+    "vach_1ytE2CY5X2Pmb1LHPTAP4M0q9Q9huHgDsmbJLnJtkESUx3s75LZb5jKrVxJgcWwAyG7Qb6g7YQQDXMAYlNQCuIA2iIlFHs9d_ba7e44d4ec804fce73dad90888f40e68"
+)
 
-if not API_KEY:
-    raise ValueError(
-        "GNANI_API_KEY not found. Check your .env file."
-    )
+client = None
+if API_KEY:
+    try:
+        client = GnaniTTSClient(api_key=API_KEY)
+    except Exception as e:
+        print(f"Warning: GnaniTTSClient startup initialization error: {e}")
 
-client = GnaniTTSClient(api_key=API_KEY)
 
 DEFAULT_VOICE = "Ambuja"
 
@@ -276,6 +280,12 @@ def generate_speech(
             return str(cached_file)
 
     # 3. Primary worker: synthesize using Gnani Timbre at optimized 24kHz and 1.05 speed
+    global client
+    if client is None:
+        if not API_KEY:
+            raise ValueError("GNANI_API_KEY is not set.")
+        client = GnaniTTSClient(api_key=API_KEY)
+
     try:
         audio = client.synthesize(
             text=text,

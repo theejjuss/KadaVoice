@@ -1102,7 +1102,12 @@ else:
 
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.environ.get("PORT", 8000))
+    raw_port = os.environ.get("PORT", "8000")
+    try:
+        port = int(str(raw_port).strip())
+    except Exception:
+        port = 8000
+    print(f"Starting KadaVoice unified server on 0.0.0.0:{port}...", flush=True)
     uvicorn.run("backend_api:app", host="0.0.0.0", port=port, reload=False)
 
 

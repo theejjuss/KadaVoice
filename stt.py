@@ -6,7 +6,10 @@ from dotenv import load_dotenv
 # Load environment variables from .env
 load_dotenv()
 
-API_KEY = os.getenv("GNANI_API_KEY")
+API_KEY = os.getenv(
+    "GNANI_API_KEY",
+    "vach_1ytE2CY5X2Pmb1LHPTAP4M0q9Q9huHgDsmbJLnJtkESUx3s75LZb5jKrVxJgcWwAyG7Qb6g7YQQDXMAYlNQCuIA2iIlFHs9d_ba7e44d4ec804fce73dad90888f40e68"
+)
 
 API_URL = "https://api.vachana.ai/stt/v3"
 
