@@ -1070,6 +1070,8 @@ def get_audio(filename: str):
 # ==================================================
 
 FRONTEND_DIST = BASE_DIRECTORY / "Redesign KadaVoice Grocery App" / "dist"
+if not (FRONTEND_DIST / "index.html").is_file():
+    FRONTEND_DIST = BASE_DIRECTORY / "dist"
 
 if (FRONTEND_DIST / "index.html").is_file():
     from fastapi.staticfiles import StaticFiles
@@ -1096,9 +1098,12 @@ else:
             "status": "running",
             "version": "2.0.0",
             "system": "Production-Ready Voice Grocery Platform"
+        }
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("backend_api:app", host="0.0.0.0", port=port, reload=False)
+
 
 

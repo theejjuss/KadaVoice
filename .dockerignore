@@ -1,0 +1,12 @@
+﻿node_modules
+**/node_modules
+__pycache__
+**/__pycache__
+*.py[cod]
+.git
+.gitignore
+venv
+*/venv
+KadaVoice/venv
+assets/recordings/*
+assets/generated_audio/*

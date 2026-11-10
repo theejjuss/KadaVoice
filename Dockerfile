@@ -7,10 +7,11 @@
 FROM node:20-alpine AS frontend-builder
 WORKDIR /app/frontend
 
-COPY "Redesign KadaVoice Grocery App/package*.json" ./
-RUN npm ci
+COPY ["Redesign KadaVoice Grocery App/package.json", "./"]
+COPY ["Redesign KadaVoice Grocery App/package-lock.json*", "./"]
+RUN npm install
 
-COPY "Redesign KadaVoice Grocery App" ./
+COPY ["Redesign KadaVoice Grocery App", "./"]
 RUN npm run build
 
 # Stage 2: Python Production Runtime
@@ -38,8 +39,9 @@ COPY stt.py ./
 COPY tts.py ./
 COPY kadavoice.db ./
 
-# Copy built frontend assets from Stage 1 into the exact expected directory
-COPY --from=frontend-builder /app/frontend/dist ./"Redesign KadaVoice Grocery App"/dist
+# Copy built frontend assets from Stage 1 into the expected directories
+COPY --from=frontend-builder ["/app/frontend/dist", "./Redesign KadaVoice Grocery App/dist"]
+COPY --from=frontend-builder ["/app/frontend/dist", "./dist"]
 
 # Create storage directories
 RUN mkdir -p assets/recordings assets/generated_audio assets/invoices
