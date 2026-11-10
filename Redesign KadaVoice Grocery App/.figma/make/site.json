@@ -1,0 +1,11 @@
+{
+  "title": "KadaVoice - AI Voice Grocery Platform",
+  "description": "Order groceries by speaking Malayalam, Manglish, or English, then review and save orders with voice confirmation—making shopping easier for Kerala customers.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

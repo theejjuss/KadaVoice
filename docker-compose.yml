@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  kadavoice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kadavoice:production
+    container_name: kadavoice_app
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - GNANI_TOKEN=${GNANI_TOKEN:-}
+      - GNANI_ACCESS_KEY=${GNANI_ACCESS_KEY:-}
+      - GNANI_CERT_PATH=${GNANI_CERT_PATH:-}
+    volumes:
+      - kadavoice_data:/app/assets
+    restart: unless-stopped
+
+volumes:
+  kadavoice_data:
