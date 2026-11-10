@@ -177,9 +177,7 @@ def build_order_confirmation(
         greeting = "നമസ്കാരം."
 
     message_parts = []
-    limit = 3
-
-    for item in orders[:limit]:
+    for item in orders:
         product = item.get("product", "")
         quantity = item.get("quantity", 1)
         unit = item.get("unit", "piece")
@@ -192,16 +190,10 @@ def build_order_confirmation(
 
     items_message = ", ".join(message_parts)
 
-    if len(orders) > limit:
-        confirmation = (
-            f"{greeting} {items_message} ഉൾപ്പെടെ {len(orders)} സാധനങ്ങൾ "
-            f"നിങ്ങളുടെ ഓർഡറിൽ ചേർത്തിട്ടുണ്ട്. ഓർഡർ നൽകിയതിന് നന്ദി! വീണ്ടും വരണേ!"
-        )
-    else:
-        confirmation = (
-            f"{greeting} {items_message} "
-            f"നിങ്ങളുടെ ഓർഡറിൽ ചേർത്തിട്ടുണ്ട്. ഓർഡർ നൽകിയതിന് നന്ദി! വീണ്ടും വരണേ!"
-        )
+    confirmation = (
+        f"{greeting} {items_message} "
+        f"നിങ്ങളുടെ ഓർഡറിൽ ചേർത്തിട്ടുണ്ട്. ഓർഡർ നൽകിയതിന് നന്ദി! വീണ്ടും വരണേ!"
+    )
 
     return confirmation
 
