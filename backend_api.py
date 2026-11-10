@@ -93,6 +93,13 @@ def startup():
             print(f"Auto-seed warning: {e}")
 
 
+@app.get("/health")
+@app.get("/api/health")
+def health_check():
+    return {"status": "ok", "app": "KadaVoice", "healthy": True}
+
+
+
 # ==================================================
 # 2. REQUEST MODELS
 # ==================================================
@@ -1108,7 +1115,7 @@ if __name__ == "__main__":
     except Exception:
         port = 8000
     print(f"Starting KadaVoice unified server on 0.0.0.0:{port}...", flush=True)
-    uvicorn.run("backend_api:app", host="0.0.0.0", port=port, reload=False)
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 
 

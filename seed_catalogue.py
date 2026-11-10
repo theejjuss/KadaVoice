@@ -1,5 +1,9 @@
 import sys
-sys.stdout.reconfigure(encoding='utf-8')
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except Exception:
+    pass
+
 from database import add_product, get_products, get_connection, insert_product_aliases, normalize_alias
 
 # Comprehensive starter catalogue and aliases for a Kerala grocery shop
